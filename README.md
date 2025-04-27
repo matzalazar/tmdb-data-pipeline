@@ -13,8 +13,6 @@ El objetivo principal es construir datasets históricos versionados que permitan
 
 El diseño modular permite ejecutar cada fase por separado, incrementar los datos incorporando nuevos endpoints, así como orquestar el flujo completo mediante un script bash.
 
----
-
 ## Requisitos
 
 Instalación de dependencias:
@@ -35,8 +33,6 @@ Además, es obligatorio obtener una **api_key** desde la [web de TMDB](https://w
 [TMDB]
 api_key = TU_API_KEY_AQUI
 ```
-
----
 
 ## Estructura del Proyecto
 
@@ -78,8 +74,6 @@ api_key = TU_API_KEY_AQUI
 
 ```
 
----
-
 ## Flujo del Pipeline
 
 ### 1. Fase de Extracción
@@ -104,8 +98,6 @@ api_key = TU_API_KEY_AQUI
 | `build_movie_details_silver.py` | Enriquecimiento, tipado, detección de plataformas y escritura con `MERGE`. |
 | `update_dimensions.py`          | Crea dimensiones de países, idiomas y géneros cruzando con metadata ISO. |
 
----
-
 ## Almacenamiento y Delta Lake
 
 Se utiliza Delta Lake para persistir la información con capacidades de:
@@ -118,8 +110,6 @@ Se utiliza Delta Lake para persistir la información con capacidades de:
 **Bronze:** datos tal como vienen de la API, con mínima limpieza  
 **Silver:** datos estructurados, enriquecidos y listos para análisis o consumo analítico
 
----
-
 ## Decisiones Técnicas y de Diseño
 
 1. Consolidación de scripts de extracción para simplificar la arquitectura y reducir redundancia.
@@ -127,8 +117,6 @@ Se utiliza Delta Lake para persistir la información con capacidades de:
 3. Uso de metadata ISO externa descargada desde Kaggle para países e idiomas.
 4. Construcción de dimensiones Silver garantizando integridad referencial.
 5. Preservación del `imdb_id` en Silver para futuros enriquecimientos de datos.
-
----
 
 ## Transformaciones Realizadas
 
@@ -138,16 +126,12 @@ Se utiliza Delta Lake para persistir la información con capacidades de:
 - Enriquecimiento con géneros extraídos y disponibilidad en plataformas detectadas.
 - Generación y actualización de dimensiones de países, idiomas y géneros.
 
----
-
 ## Análisis Exploratorio
 
 Se incluyen notebooks en la carpeta `notebooks/`:
 
 - `eda_bronze.ipynb`: exploración de datos crudos y snapshots
 - `eda_silver.ipynb`: validación de la Capa Silver y sus enriquecimientos
-
----
 
 ## Ejecución del Pipeline
 
@@ -164,14 +148,10 @@ Este script orquesta:
 3. Construcción de Capas Silver
 4. Actualización de dimensiones
 
----
-
 ## Futuras Extensiones
 
 - Incorporación de la evolución de ratings y cantidad de votos de forma incremental.
 - Enriquecimiento con keywords, productoras y otros metadatos.
-- Tiempo promedio en cartelera por género o país
-- Modelos predictivos sobre éxito y permanencia
-- Detección de sesgos en la representación lingüística y cultural
-
----
+- Tiempo promedio en cartelera por género o país.
+- Modelos predictivos sobre éxito y permanencia.
+- Detección de sesgos en la representación lingüística y cultural.
